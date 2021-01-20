@@ -9,40 +9,6 @@
           "application": false,
           "date": "10/01/2021"
         }
-      ],
-      "a2": [
-        {
-          "name": "Produto 1",
-          "dose": "Kg/ha",
-          "application": false,
-          "date": "10/01/2021"
-        },
-        {
-          "name": "Produto 2",
-          "dose": "Kg/ha",
-          "application": false,
-          "date": "10/01/2021"
-        }
-      ],
-      "a3": [
-        {
-          "name": "Produto 1",
-          "dose": "Kg/ha",
-          "application": false,
-          "date": "10/01/2021"
-        },
-        {
-          "name": "Produto 2",
-          "dose": "L/ha",
-          "application": false,
-          "date": "10/01/2021"
-        },
-        {
-          "name": "Produto 3",
-          "dose": "Kg/ha",
-          "application": false,
-          "date": "10/01/2021"
-        }
       ]
     }
   ]
