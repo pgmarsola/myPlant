@@ -13,13 +13,11 @@ class DatabaseHelper {
   static final columnId = '_id';
   static final columnCod = 'cod';
   static final columnName = 'name';
-  static final columnType = 'type';
-  static final columnDesc = 'desc';
-  static final columnAtk = 'atk';
-  static final columnDef = 'def';
-  static final columnLevel = 'level';
-  static final columnRace = 'race';
-  static final columnCardImages = 'cardImages';
+  static final columnDose = 'dose';
+  static final columnApplication = 'application';
+  static final columnDate = 'date';
+  static final columnAnnotation = 'annotation';
+  static final columnDateApplication = 'dateApplication';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -45,17 +43,15 @@ class DatabaseHelper {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE $table (
+          CREATE TABLE IF NOT EXISTS $table (
             $columnId INTEGER PRIMARY KEY,
             $columnCod TEXT NOT NULL,
             $columnName TEXT NOT NULL,
-            $columnType TEXT NOT NULL,
-            $columnDesc TEXT NOT NULL,
-            $columnAtk TEXT NOT NULL,
-            $columnDef TEXT NOT NULL,
-            $columnLevel TEXT NOT NULL,
-            $columnRace TEXT NOT NULL,
-            $columnCardImages TEXT NOT NULL
+            $columnDose TEXT NOT NULL,
+            $columnApplication BOOLEAN NOT NULL CHECK,
+            $columnDate TEXT NOT NULL,
+            $columnAnnotation TEXT NOT NULL,
+            $columnDateApplication TEXT NOT NULL
           )
           ''');
   }

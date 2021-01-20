@@ -1,4 +1,4 @@
-var program = {
+{
   "title": "Programa 1",
   "applications": [
     {
@@ -82,4 +82,4 @@ var program = {
       ]
     }
   ]
-};
+}
