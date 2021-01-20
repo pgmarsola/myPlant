@@ -16,7 +16,8 @@ class ProgramBtn extends StatelessWidget {
     return Container(
       color: transparent,
       height: screenHeight * 10,
-      margin: EdgeInsets.symmetric(horizontal: screenHeight * 3),
+      margin: EdgeInsets.symmetric(
+          horizontal: screenHeight * 3, vertical: screenHeight * 3),
       child: Stack(
         children: [
           Align(

@@ -6,3 +6,4 @@ final Color verdeclaro = Color(0xFF9EE8C0);
 final Color verdeescuro = Color(0xFF388E3C);
 final Color branco = Color(0xFFFFFFFF);
 final Color chumbo = Color(0xFF42474A);
+final Color cinzaclaro = Color(0xFFCACACA);
