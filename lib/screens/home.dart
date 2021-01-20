@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_plant/mobx_estruture/data.controller.dart';
 import 'package:my_plant/screens/applications.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/program_btn.dart';
@@ -10,11 +11,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  ProgramController _programController;
+
   void _nav() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Applications()),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _programController = ProgramController();
+    _programController.fetchPrograms();
   }
 
   @override
