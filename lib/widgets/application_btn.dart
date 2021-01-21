@@ -5,8 +5,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 class ApplicationBtn extends StatefulWidget {
   final String name;
   final Function route;
+  final List _controller;
 
-  ApplicationBtn(this.name, this.route);
+  ApplicationBtn(this.name, this.route, this._controller);
 
   @override
   _ApplicationBtnState createState() => _ApplicationBtnState();
@@ -44,7 +45,7 @@ class _ApplicationBtnState extends State<ApplicationBtn> {
                 animation: true,
                 animationDuration: 1200,
                 lineWidth: 3,
-                percent: 0.5,
+                percent: widget._controller.length / 10,
                 center: Image.asset(
                   "assets/plant.png",
                   scale: screenHeight * 4,

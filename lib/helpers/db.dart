@@ -45,13 +45,13 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS $table (
             $columnId INTEGER PRIMARY KEY,
-            $columnCod TEXT NOT NULL,
-            $columnName TEXT NOT NULL,
-            $columnDose TEXT NOT NULL,
-            $columnApplication BOOLEAN NOT NULL CHECK,
-            $columnDate TEXT NOT NULL,
-            $columnAnnotation TEXT NOT NULL,
-            $columnDateApplication TEXT NOT NULL
+            $columnCod TEXT,
+            $columnName TEXT,
+            $columnDose TEXT,
+            $columnApplication INTEGER,
+            $columnDate TEXT,
+            $columnAnnotation TEXT,
+            $columnDateApplication TEXT
           )
           ''');
   }

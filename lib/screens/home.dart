@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_plant/helpers/db.dart';
 import 'package:my_plant/mobx_estruture/data.controller.dart';
+import 'package:my_plant/models/applications.dart';
 import 'package:my_plant/screens/applications.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/program_btn.dart';
@@ -12,11 +14,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ProgramController _programController;
+  final dbHelper = DatabaseHelper.instance;
 
   void _nav() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Applications()),
+      MaterialPageRoute(builder: (context) => ApplicationsScreen()),
     );
   }
 
@@ -24,7 +27,35 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _programController = ProgramController();
-    _programController.fetchPrograms();
+    _populeDB();
+  }
+
+  void _insert(Applications data) async {
+    // row to insert
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnCod: data.codApplication.toString(),
+      DatabaseHelper.columnName: data.name,
+      DatabaseHelper.columnDose: data.dose,
+      DatabaseHelper.columnApplication: data.application,
+      DatabaseHelper.columnDate: data.date,
+      DatabaseHelper.columnAnnotation: data.annotation,
+      DatabaseHelper.columnDateApplication: data.dateApplication,
+    };
+    final id = await dbHelper.insert(row);
+    print('inserted row id: $id');
+  }
+
+  _populeDB() async {
+    await _programController.fetchPrograms();
+    for (int i = 0; i < _programController.program.applications.length; i++) {
+      _insert(_programController.application[i]);
+    }
+  }
+
+  void _query() async {
+    final allRows = await dbHelper.queryAllRows();
+    print('query all rows:');
+    allRows.forEach((row) => print(row));
   }
 
   @override
@@ -65,6 +96,14 @@ class _HomeState extends State<Home> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: chumbo, fontWeight: FontWeight.w500),
               ),
+            ),
+            IconButton(
+                icon: Icon(Icons.cloud_download),
+                onPressed: () {
+                  _query();
+                }),
+            SizedBox(
+              height: screenHeight * 10,
             ),
             Column(
               children: list,

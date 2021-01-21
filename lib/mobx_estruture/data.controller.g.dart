@@ -24,6 +24,21 @@ mixin _$ProgramController on _ProgramontrollerBase, Store {
     });
   }
 
+  final _$applicationAtom = Atom(name: '_ProgramontrollerBase.application');
+
+  @override
+  List<Applications> get application {
+    _$applicationAtom.reportRead();
+    return super.application;
+  }
+
+  @override
+  set application(List<Applications> value) {
+    _$applicationAtom.reportWrite(value, super.application, () {
+      super.application = value;
+    });
+  }
+
   final _$isLoadingAtom = Atom(name: '_ProgramontrollerBase.isLoading');
 
   @override
@@ -51,6 +66,7 @@ mixin _$ProgramController on _ProgramontrollerBase, Store {
   String toString() {
     return '''
 program: ${program},
+application: ${application},
 isLoading: ${isLoading}
     ''';
   }

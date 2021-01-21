@@ -1,44 +1,40 @@
-import 'package:my_plant/models/a.dart';
-
 class Applications {
-  List<A> a1;
-  List<A> a2;
-  List<A> a3;
+  int codApplication;
+  String name;
+  String dose;
+  bool application;
+  String date;
+  String annotation;
+  String dateApplication;
 
-  Applications({this.a1, this.a2, this.a3});
+  Applications(
+      {this.codApplication,
+      this.name,
+      this.dose,
+      this.application,
+      this.date,
+      this.annotation,
+      this.dateApplication});
 
   Applications.fromJson(Map<String, dynamic> json) {
-    if (json['a1'] != null) {
-      a1 = <A>[];
-      json['a1'].forEach((v) {
-        a1.add(new A.fromJson(v));
-      });
-    }
-    if (json['a2'] != null) {
-      a2 = <A>[];
-      json['a2'].forEach((v) {
-        a2.add(new A.fromJson(v));
-      });
-    }
-    if (json['a3'] != null) {
-      a3 = <A>[];
-      json['a3'].forEach((v) {
-        a3.add(new A.fromJson(v));
-      });
-    }
+    codApplication = json['codApplication'];
+    name = json['name'];
+    dose = json['dose'];
+    application = json['application'];
+    date = json['date'];
+    annotation = json['annotation'];
+    dateApplication = json['dateApplication'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.a1 != null) {
-      data['a1'] = this.a1.map((v) => v.toJson()).toList();
-    }
-    if (this.a2 != null) {
-      data['a2'] = this.a2.map((v) => v.toJson()).toList();
-    }
-    if (this.a3 != null) {
-      data['a3'] = this.a3.map((v) => v.toJson()).toList();
-    }
+    data['codApplication'] = this.codApplication;
+    data['name'] = this.name;
+    data['dose'] = this.dose;
+    data['application'] = this.application;
+    data['date'] = this.date;
+    data['annotation'] = this.annotation;
+    data['dateApplication'] = this.dateApplication;
     return data;
   }
 }
