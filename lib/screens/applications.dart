@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_plant/mobx_estruture/data.controller.dart';
+import 'package:my_plant/helpers/db.dart';
 import 'package:my_plant/models/applications.dart';
+import 'package:my_plant/screens/products.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/application_btn.dart';
+import 'package:my_plant/widgets/bottombar.dart';
 import 'package:my_plant/widgets/topbar.dart';
+import 'dart:async';
 
 class ApplicationsScreen extends StatefulWidget {
   @override
@@ -11,12 +14,26 @@ class ApplicationsScreen extends StatefulWidget {
 }
 
 class _ApplicationsScreenState extends State<ApplicationsScreen> {
-  ProgramController _programController;
+  static DatabaseHelper dbHelper;
+  int tamanhoDaLista = 0;
+  List<Applications> listaProdutos;
 
   @override
   void initState() {
     super.initState();
-    _programController = ProgramController();
+    _carregarLista();
+  }
+
+  _carregarLista() async {
+    dbHelper = DatabaseHelper.instance;
+    Future<List<Applications>> prods = dbHelper.getProds();
+    prods.then((novaListaProdutos) {
+      setState(() {
+        this.listaProdutos = novaListaProdutos;
+
+        this.tamanhoDaLista = novaListaProdutos.length;
+      });
+    });
   }
 
   @override
@@ -24,16 +41,17 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
     var size = MediaQuery.of(context).size;
     var screenHeight = size.height / 100;
 
-    List<Applications> a1 =
-        _programController.application.where((i) => i.codApplication == 1);
-    List<Applications> a2 =
-        _programController.application.where((i) => i.codApplication == 2);
-    List<Applications> a3 =
-        _programController.application.where((i) => i.codApplication == 0);
+    void _nav(List<Applications> list, int tamanho) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Products(list, tamanho)),
+      );
+    }
 
     return Scaffold(
       backgroundColor: verdeclaro,
       appBar: TopBar(),
+      bottomNavigationBar: BottomBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,9 +64,15 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
                 style: TextStyle(color: chumbo, fontWeight: FontWeight.w500),
               ),
             ),
-            ApplicationBtn('Aplicação 1', () {}, a1),
-            ApplicationBtn('Aplicação 2', () {}, a2),
-            ApplicationBtn('Aplicação 3', () {}, a3),
+            ApplicationBtn(
+              'Aplicação 1',
+              () {
+                _nav(
+                  listaProdutos,
+                  tamanhoDaLista,
+                );
+              },
+            )
           ],
         ),
       ),

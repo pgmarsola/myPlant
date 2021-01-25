@@ -33,7 +33,6 @@ class _HomeState extends State<Home> {
   void _insert(Applications data) async {
     // row to insert
     Map<String, dynamic> row = {
-      DatabaseHelper.columnCod: data.codApplication.toString(),
       DatabaseHelper.columnName: data.name,
       DatabaseHelper.columnDose: data.dose,
       DatabaseHelper.columnApplication: data.application,
@@ -47,15 +46,9 @@ class _HomeState extends State<Home> {
 
   _populeDB() async {
     await _programController.fetchPrograms();
-    for (int i = 0; i < _programController.program.applications.length; i++) {
+    for (int i = 0; i < _programController.application.length; i++) {
       _insert(_programController.application[i]);
     }
-  }
-
-  void _query() async {
-    final allRows = await dbHelper.queryAllRows();
-    print('query all rows:');
-    allRows.forEach((row) => print(row));
   }
 
   @override
@@ -96,14 +89,6 @@ class _HomeState extends State<Home> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: chumbo, fontWeight: FontWeight.w500),
               ),
-            ),
-            IconButton(
-                icon: Icon(Icons.cloud_download),
-                onPressed: () {
-                  _query();
-                }),
-            SizedBox(
-              height: screenHeight * 10,
             ),
             Column(
               children: list,

@@ -1,14 +1,14 @@
 class Applications {
-  int codApplication;
+  int id;
   String name;
   String dose;
-  bool application;
+  int application;
   String date;
   String annotation;
   String dateApplication;
 
   Applications(
-      {this.codApplication,
+      {this.id,
       this.name,
       this.dose,
       this.application,
@@ -17,7 +17,7 @@ class Applications {
       this.dateApplication});
 
   Applications.fromJson(Map<String, dynamic> json) {
-    codApplication = json['codApplication'];
+    id = json['id'];
     name = json['name'];
     dose = json['dose'];
     application = json['application'];
@@ -28,7 +28,7 @@ class Applications {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['codApplication'] = this.codApplication;
+    data['id'] = this.id;
     data['name'] = this.name;
     data['dose'] = this.dose;
     data['application'] = this.application;
@@ -36,5 +36,35 @@ class Applications {
     data['annotation'] = this.annotation;
     data['dateApplication'] = this.dateApplication;
     return data;
+  }
+
+  static String table = "tabela_application";
+  static String columnId = "id";
+  static String columnName = "name";
+  static String columnDose = "dose";
+  static String columnApplication = "application";
+  static String columnDate = "date";
+  static String columnAnnotation = "annotation";
+  static String columnDateApplication = "dateApplication";
+
+  Applications.fromMap(Map map) {
+    name = map[columnName];
+    dose = map[columnDose];
+    application = map[columnApplication];
+    date = map[columnDate];
+    annotation = map[columnAnnotation];
+    dateApplication = map[columnDateApplication];
+  }
+
+  Map toMap() {
+    Map<String, dynamic> map = {
+      columnName: name,
+      columnDose: dose,
+      columnApplication: application,
+      columnDate: date,
+      columnAnnotation: annotation,
+      columnDateApplication: dateApplication,
+    };
+    return map;
   }
 }

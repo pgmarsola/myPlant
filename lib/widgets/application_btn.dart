@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_plant/utils/colors.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class ApplicationBtn extends StatefulWidget {
   final String name;
   final Function route;
-  final List _controller;
 
-  ApplicationBtn(this.name, this.route, this._controller);
+  ApplicationBtn(
+    this.name,
+    this.route,
+  );
 
   @override
   _ApplicationBtnState createState() => _ApplicationBtnState();
@@ -40,19 +41,12 @@ class _ApplicationBtnState extends State<ApplicationBtn> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircularPercentIndicator(
-                radius: screenHeight * 8,
-                animation: true,
-                animationDuration: 1200,
-                lineWidth: 3,
-                percent: widget._controller.length / 10,
-                center: Image.asset(
+              CircleAvatar(
+                child: Image.asset(
                   "assets/plant.png",
                   scale: screenHeight * 4,
                 ),
-                circularStrokeCap: CircularStrokeCap.butt,
-                backgroundColor: cinzaclaro,
-                progressColor: verde,
+                backgroundColor: amarelo,
               ),
               Text(
                 widget.name.toUpperCase(),
