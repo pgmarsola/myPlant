@@ -68,13 +68,6 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int> updateApplication(Applications applications, int id) async {
-    var db = await this.database;
-    var result = await db.rawUpdate(
-        "UPDATE $table SET $columnCod = '${applications.cod}, $columnName ='${applications.name}', $columnDose = '${applications.dose}', $columnApplication = '${applications.application}', $columnDate = '${applications.date}', $columnAnnotation = '${applications.annotation}', $columnDateApplication = '${applications.dateApplication}' WHERE $columnId = '$id'");
-    return result;
-  }
-
   Future<int> update(Map<String, dynamic> row, int id) async {
     Database db = await instance.database;
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);

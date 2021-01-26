@@ -16,7 +16,7 @@ class _ProductsState extends State<Products> {
   static DatabaseHelper dbHelper;
   int tamanhoDaLista = 0;
   List<Applications> listaProdutos;
-  var conta;
+  var conta = 0.0;
 
   @override
   void initState() {
@@ -39,6 +39,8 @@ class _ProductsState extends State<Products> {
           conta = valor;
         } else if (value == 1 && conta != 1) {
           conta = conta + valor;
+        } else if (value == 0 && conta != 0) {
+          conta = conta - valor;
         }
       });
     });
