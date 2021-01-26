@@ -12,6 +12,7 @@ class DatabaseHelper {
   static final table = 'programs_table';
 
   static final columnId = '_id';
+  static final columnCod = 'cod';
   static final columnName = 'name';
   static final columnDose = 'dose';
   static final columnApplication = 'application';
@@ -45,6 +46,7 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE IF NOT EXISTS $table (
             $columnId INTEGER PRIMARY KEY,
+            $columnCod INTEGER,
             $columnName TEXT,
             $columnDose TEXT,
             $columnApplication INTEGER,
@@ -66,9 +68,15 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int> update(Map<String, dynamic> row) async {
+  Future<int> updateApplication(Applications applications, int id) async {
+    var db = await this.database;
+    var result = await db.rawUpdate(
+        "UPDATE $table SET $columnCod = '${applications.cod}, $columnName ='${applications.name}', $columnDose = '${applications.dose}', $columnApplication = '${applications.application}', $columnDate = '${applications.date}', $columnAnnotation = '${applications.annotation}', $columnDateApplication = '${applications.dateApplication}' WHERE $columnId = '$id'");
+    return result;
+  }
+
+  Future<int> update(Map<String, dynamic> row, int id) async {
     Database db = await instance.database;
-    int id = row[columnId];
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
@@ -85,5 +93,11 @@ class DatabaseHelper {
       applications.add(Applications.fromMap(prodsMapList[i]));
     }
     return applications;
+  }
+
+  deleteDatabase() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
+    return await databaseFactory.deleteDatabase(path);
   }
 }

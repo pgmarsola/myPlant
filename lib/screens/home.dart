@@ -27,12 +27,14 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _programController = ProgramController();
+    dbHelper.deleteDatabase();
     _populeDB();
   }
 
   void _insert(Applications data) async {
     // row to insert
     Map<String, dynamic> row = {
+      DatabaseHelper.columnCod: data.cod,
       DatabaseHelper.columnName: data.name,
       DatabaseHelper.columnDose: data.dose,
       DatabaseHelper.columnApplication: data.application,

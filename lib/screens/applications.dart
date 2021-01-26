@@ -15,25 +15,10 @@ class ApplicationsScreen extends StatefulWidget {
 
 class _ApplicationsScreenState extends State<ApplicationsScreen> {
   static DatabaseHelper dbHelper;
-  int tamanhoDaLista = 0;
-  List<Applications> listaProdutos;
 
   @override
   void initState() {
     super.initState();
-    _carregarLista();
-  }
-
-  _carregarLista() async {
-    dbHelper = DatabaseHelper.instance;
-    Future<List<Applications>> prods = dbHelper.getProds();
-    prods.then((novaListaProdutos) {
-      setState(() {
-        this.listaProdutos = novaListaProdutos;
-
-        this.tamanhoDaLista = novaListaProdutos.length;
-      });
-    });
   }
 
   @override
@@ -41,10 +26,10 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
     var size = MediaQuery.of(context).size;
     var screenHeight = size.height / 100;
 
-    void _nav(List<Applications> list, int tamanho) {
+    void _nav() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Products(list, tamanho)),
+        MaterialPageRoute(builder: (context) => Products()),
       );
     }
 
@@ -67,10 +52,7 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
             ApplicationBtn(
               'Aplicação 1',
               () {
-                _nav(
-                  listaProdutos,
-                  tamanhoDaLista,
-                );
+                _nav();
               },
             )
           ],

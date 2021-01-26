@@ -1,5 +1,5 @@
 class Applications {
-  int id;
+  int cod;
   String name;
   String dose;
   int application;
@@ -8,7 +8,7 @@ class Applications {
   String dateApplication;
 
   Applications(
-      {this.id,
+      {this.cod,
       this.name,
       this.dose,
       this.application,
@@ -17,7 +17,7 @@ class Applications {
       this.dateApplication});
 
   Applications.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    cod = json['cod'];
     name = json['name'];
     dose = json['dose'];
     application = json['application'];
@@ -28,7 +28,7 @@ class Applications {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['cod'] = this.cod;
     data['name'] = this.name;
     data['dose'] = this.dose;
     data['application'] = this.application;
@@ -39,7 +39,8 @@ class Applications {
   }
 
   static String table = "tabela_application";
-  static String columnId = "id";
+  static String columnId = "cod";
+  static String columnCod = "cod";
   static String columnName = "name";
   static String columnDose = "dose";
   static String columnApplication = "application";
@@ -48,6 +49,8 @@ class Applications {
   static String columnDateApplication = "dateApplication";
 
   Applications.fromMap(Map map) {
+    cod = map[columnId];
+    cod = map[columnCod];
     name = map[columnName];
     dose = map[columnDose];
     application = map[columnApplication];
@@ -58,6 +61,8 @@ class Applications {
 
   Map toMap() {
     Map<String, dynamic> map = {
+      columnId: cod,
+      columnCod: cod,
       columnName: name,
       columnDose: dose,
       columnApplication: application,
