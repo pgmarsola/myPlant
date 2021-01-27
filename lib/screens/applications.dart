@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_plant/helpers/db.dart';
-import 'package:my_plant/models/applications.dart';
 import 'package:my_plant/screens/products.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/application_btn.dart';
 import 'package:my_plant/widgets/bottombar.dart';
 import 'package:my_plant/widgets/topbar.dart';
-import 'dart:async';
 
 class ApplicationsScreen extends StatefulWidget {
   @override
@@ -14,8 +11,6 @@ class ApplicationsScreen extends StatefulWidget {
 }
 
 class _ApplicationsScreenState extends State<ApplicationsScreen> {
-  static DatabaseHelper dbHelper;
-
   @override
   void initState() {
     super.initState();
