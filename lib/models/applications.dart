@@ -6,15 +6,24 @@ class Applications {
   String date;
   String annotation;
   String dateApplication;
+  String longA;
+  String latA;
+  String longB;
+  String latB;
 
-  Applications(
-      {this.cod,
-      this.name,
-      this.dose,
-      this.application,
-      this.date,
-      this.annotation,
-      this.dateApplication});
+  Applications({
+    this.cod,
+    this.name,
+    this.dose,
+    this.application,
+    this.date,
+    this.annotation,
+    this.dateApplication,
+    this.longA,
+    this.latA,
+    this.longB,
+    this.latB,
+  });
 
   Applications.fromJson(Map<String, dynamic> json) {
     cod = json['cod'];
@@ -24,6 +33,10 @@ class Applications {
     date = json['date'];
     annotation = json['annotation'];
     dateApplication = json['dateApplication'];
+    longA = json['longA'];
+    latA = json['latA'];
+    longB = json['longB'];
+    latB = json['latB'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +48,10 @@ class Applications {
     data['date'] = this.date;
     data['annotation'] = this.annotation;
     data['dateApplication'] = this.dateApplication;
+    data['longA'] = this.longA;
+    data['latA'] = this.latA;
+    data['longB'] = this.longB;
+    data['latB'] = this.latB;
     return data;
   }
 
@@ -47,6 +64,10 @@ class Applications {
   static String columnDate = "date";
   static String columnAnnotation = "annotation";
   static String columnDateApplication = "dateApplication";
+  static String columnLongA = "longA";
+  static String columnLatA = "latA";
+  static String columnLongB = "longB";
+  static String columnLatB = "latB";
 
   Applications.fromMap(Map map) {
     cod = map[columnId];
@@ -57,6 +78,10 @@ class Applications {
     date = map[columnDate];
     annotation = map[columnAnnotation];
     dateApplication = map[columnDateApplication];
+    longA = map[columnLongA];
+    latA = map[columnLatA];
+    longB = map[columnLongB];
+    latB = map[columnLatB];
   }
 
   Map toMap() {
@@ -69,6 +94,10 @@ class Applications {
       columnDate: date,
       columnAnnotation: annotation,
       columnDateApplication: dateApplication,
+      columnLongA: longA,
+      columnLatA: latA,
+      columnLongB: longB,
+      columnLatB: latB,
     };
     return map;
   }

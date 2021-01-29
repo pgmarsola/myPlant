@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:my_plant/models/applications.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "Internal.db";
-  static final _databaseVersion = 1;
+  static DatabaseHelper _databaseHelper;
+  static Database _database;
 
   static final table = 'programs_table';
 
@@ -19,26 +18,34 @@ class DatabaseHelper {
   static final columnDate = 'date';
   static final columnAnnotation = 'annotation';
   static final columnDateApplication = 'dateApplication';
+  static final columnLongA = "longA";
+  static final columnLatA = "latA";
+  static final columnLongB = "longB";
+  static final columnLatB = "latB";
 
-  // make this a singleton class
-  DatabaseHelper._privateConstructor();
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  DatabaseHelper._createInstance();
+  factory DatabaseHelper() {
+    if (_databaseHelper == null) {
+      _databaseHelper = DatabaseHelper._createInstance();
+    }
 
-  // only have a single app-wide reference to the database
-  static Database _database;
+    return _databaseHelper;
+  }
+
   Future<Database> get database async {
-    if (_database != null) return _database;
-    // lazily instantiate the db the first time it is accessed
-    _database = await _initDatabase();
+    if (_database == null) {
+      _database = await initDb();
+    }
+
     return _database;
   }
 
-  // this opens the database (and creates it if it doesn't exist)
-  _initDatabase() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+  Future<Database> initDb() async {
+    Directory diretorio = await getApplicationDocumentsDirectory();
+    String path = diretorio.path + 'programs.db';
+
+    var dbTarefas = await openDatabase(path, version: 1, onCreate: _onCreate);
+    return dbTarefas;
   }
 
   // SQL code to create the database table
@@ -52,13 +59,17 @@ class DatabaseHelper {
             $columnApplication INTEGER,
             $columnDate TEXT,
             $columnAnnotation TEXT,
-            $columnDateApplication TEXT
+            $columnDateApplication TEXT,
+            $columnLongA TEXT,
+            $columnLatA TEXT,
+            $columnLongB TEXT,
+            $columnLatB TEXT
           )
           ''');
   }
 
   Future<int> insert(Map<String, dynamic> row) async {
-    Database db = await instance.database;
+    Database db = await this.database;
     return await db.insert(table, row);
   }
 
@@ -69,12 +80,12 @@ class DatabaseHelper {
   }
 
   Future<int> update(Map<String, dynamic> row, int id) async {
-    Database db = await instance.database;
+    Database db = await this.database;
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
-    Database db = await instance.database;
+    Database db = await this.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
@@ -86,11 +97,5 @@ class DatabaseHelper {
       applications.add(Applications.fromMap(prodsMapList[i]));
     }
     return applications;
-  }
-
-  deleteDatabase() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databaseName);
-    return await databaseFactory.deleteDatabase(path);
   }
 }

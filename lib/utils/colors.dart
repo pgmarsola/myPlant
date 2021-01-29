@@ -8,3 +8,4 @@ final Color branco = Color(0xFFFFFFFF);
 final Color chumbo = Color(0xFF42474A);
 final Color cinzaclaro = Color(0xFFCACACA);
 final Color amarelo = Color(0xFFEFBF41);
+final Color vermelho = Color(0xFFB71C1C);

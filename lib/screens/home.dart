@@ -13,44 +13,32 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  ProgramController _programController;
-  final dbHelper = DatabaseHelper.instance;
+  static DatabaseHelper db;
+  var tamanhoDaLista;
+  List<Applications> list;
 
   void _nav() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => ApplicationsScreen()),
+      MaterialPageRoute(
+          builder: (context) => ApplicationsScreen(tamanhoDaLista)),
     );
   }
 
   @override
   void initState() {
     super.initState();
-    _programController = ProgramController();
-    dbHelper.deleteDatabase();
-    _populeDB();
-  }
+    db = new DatabaseHelper();
 
-  void _insert(Applications data) async {
-    // row to insert
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnCod: data.cod,
-      DatabaseHelper.columnName: data.name,
-      DatabaseHelper.columnDose: data.dose,
-      DatabaseHelper.columnApplication: data.application,
-      DatabaseHelper.columnDate: data.date,
-      DatabaseHelper.columnAnnotation: data.annotation,
-      DatabaseHelper.columnDateApplication: data.dateApplication,
-    };
-    final id = await dbHelper.insert(row);
-    print('inserted row id: $id');
-  }
+    db.initDb();
 
-  _populeDB() async {
-    await _programController.fetchPrograms();
-    for (int i = 0; i < _programController.application.length; i++) {
-      _insert(_programController.application[i]);
-    }
+    Future<List<Applications>> listFuture = db.getProds();
+    listFuture.then((novalist) {
+      setState(() {
+        this.list = novalist;
+        this.tamanhoDaLista = novalist.length;
+      });
+    });
   }
 
   @override

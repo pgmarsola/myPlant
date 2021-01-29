@@ -9,7 +9,11 @@ class JsonData {
         "application": 0,
         "date": "10/01/2021",
         "annotation": "",
-        "dateApplication": ""
+        "dateApplication": "",
+        "lngA": "",
+        "latA": "",
+        "longB": "",
+        "latB": ""
       },
       {
         "cod": 2,
@@ -18,7 +22,11 @@ class JsonData {
         "application": 0,
         "date": "10/01/2021",
         "annotation": "",
-        "dateApplication": ""
+        "dateApplication": "",
+        "lngA": "",
+        "latA": "",
+        "longB": "",
+        "latB": ""
       },
       {
         "cod": 3,
@@ -27,7 +35,11 @@ class JsonData {
         "application": 0,
         "date": "10/01/2021",
         "annotation": "",
-        "dateApplication": ""
+        "dateApplication": "",
+        "lngA": "",
+        "latA": "",
+        "longB": "",
+        "latB": ""
       },
       {
         "cod": 4,
@@ -36,7 +48,11 @@ class JsonData {
         "application": 0,
         "date": "10/01/2021",
         "annotation": "",
-        "dateApplication": ""
+        "dateApplication": "",
+        "lngA": "",
+        "latA": "",
+        "longB": "",
+        "latB": ""
       }
     ]
   };
