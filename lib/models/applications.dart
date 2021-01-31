@@ -6,8 +6,7 @@ class Applications {
   String date;
   String annotation;
   String dateApplication;
-  String longA;
-  String latA;
+  String polygons;
   String longB;
   String latB;
 
@@ -19,8 +18,7 @@ class Applications {
     this.date,
     this.annotation,
     this.dateApplication,
-    this.longA,
-    this.latA,
+    this.polygons,
     this.longB,
     this.latB,
   });
@@ -33,8 +31,7 @@ class Applications {
     date = json['date'];
     annotation = json['annotation'];
     dateApplication = json['dateApplication'];
-    longA = json['longA'];
-    latA = json['latA'];
+    polygons = json['polygons'];
     longB = json['longB'];
     latB = json['latB'];
   }
@@ -48,8 +45,7 @@ class Applications {
     data['date'] = this.date;
     data['annotation'] = this.annotation;
     data['dateApplication'] = this.dateApplication;
-    data['longA'] = this.longA;
-    data['latA'] = this.latA;
+    data['polygons'] = this.polygons;
     data['longB'] = this.longB;
     data['latB'] = this.latB;
     return data;
@@ -64,8 +60,7 @@ class Applications {
   static String columnDate = "date";
   static String columnAnnotation = "annotation";
   static String columnDateApplication = "dateApplication";
-  static String columnLongA = "longA";
-  static String columnLatA = "latA";
+  static String columnPolygons = "polygons";
   static String columnLongB = "longB";
   static String columnLatB = "latB";
 
@@ -78,8 +73,7 @@ class Applications {
     date = map[columnDate];
     annotation = map[columnAnnotation];
     dateApplication = map[columnDateApplication];
-    longA = map[columnLongA];
-    latA = map[columnLatA];
+    polygons = map[columnPolygons];
     longB = map[columnLongB];
     latB = map[columnLatB];
   }
@@ -94,8 +88,7 @@ class Applications {
       columnDate: date,
       columnAnnotation: annotation,
       columnDateApplication: dateApplication,
-      columnLongA: longA,
-      columnLatA: latA,
+      columnPolygons: polygons,
       columnLongB: longB,
       columnLatB: latB,
     };

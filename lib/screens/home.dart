@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_plant/helpers/db.dart';
-import 'package:my_plant/mobx_estruture/data.controller.dart';
 import 'package:my_plant/models/applications.dart';
 import 'package:my_plant/screens/applications.dart';
 import 'package:my_plant/utils/colors.dart';

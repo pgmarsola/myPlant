@@ -18,8 +18,7 @@ class DatabaseHelper {
   static final columnDate = 'date';
   static final columnAnnotation = 'annotation';
   static final columnDateApplication = 'dateApplication';
-  static final columnLongA = "longA";
-  static final columnLatA = "latA";
+  static final columnPolygons = "polygons";
   static final columnLongB = "longB";
   static final columnLatB = "latB";
 
@@ -60,8 +59,7 @@ class DatabaseHelper {
             $columnDate TEXT,
             $columnAnnotation TEXT,
             $columnDateApplication TEXT,
-            $columnLongA TEXT,
-            $columnLatA TEXT,
+            $columnPolygons TEXT,
             $columnLongB TEXT,
             $columnLatB TEXT
           )

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:my_plant/helpers/db.dart';
 import 'package:my_plant/models/applications.dart';
+import 'package:my_plant/screens/getpolygons.dart';
 import 'package:my_plant/screens/products.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/form.dart';
 
 class EditProduct extends StatefulWidget {
+  final Position _position;
   final Applications applications;
 
-  EditProduct(this.applications);
+  EditProduct(this.applications, this._position);
 
   @override
   _EditProductState createState() => _EditProductState();
@@ -19,7 +21,6 @@ class _EditProductState extends State<EditProduct> {
   final dbHelper = DatabaseHelper();
 
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-  Position _positionApply;
   Position _positionAnnotation;
 
   final _annotation = TextEditingController();
@@ -36,22 +37,6 @@ class _EditProductState extends State<EditProduct> {
     _annotation.text = widget.applications.annotation;
     _date.text = widget.applications.dateApplication;
     value = widget.applications.application == 1 ? true : false;
-  }
-
-  _getLocationApply() {
-    geolocator
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        .then((Position position) {
-      setState(() {
-        _positionApply = position;
-      });
-    }).catchError((e) {
-      final snackBar = SnackBar(
-        content: Text('Erro ao buscar localização'),
-      );
-
-      Scaffold.of(context).showBottomSheet((context) => snackBar);
-    });
   }
 
   _getLocationAnnotation() {
@@ -87,7 +72,7 @@ class _EditProductState extends State<EditProduct> {
               color: verde,
             ),
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => Products()),
               );
@@ -106,8 +91,7 @@ class _EditProductState extends State<EditProduct> {
               DatabaseHelper.columnDate: widget.applications.date,
               DatabaseHelper.columnAnnotation: _annotation.text,
               DatabaseHelper.columnDateApplication: _date.text,
-              DatabaseHelper.columnLongA: _positionApply.longitude.toString(),
-              DatabaseHelper.columnLatA: _positionApply.latitude.toString(),
+              DatabaseHelper.columnPolygons: '_polygons',
               DatabaseHelper.columnLongB:
                   _positionAnnotation.longitude.toString(),
               DatabaseHelper.columnLatB:
@@ -119,7 +103,7 @@ class _EditProductState extends State<EditProduct> {
 
             _formKey.currentState.reset();
 
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Products()),
             );
@@ -169,7 +153,13 @@ class _EditProductState extends State<EditProduct> {
                       value = newValue;
                       print(value);
                       if (value == true) {
-                        _getLocationApply();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GetPolygons(
+                                  widget._position,
+                                  widget.applications.cod.toString())),
+                        );
                       }
                     });
                   },

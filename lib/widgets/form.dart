@@ -20,6 +20,11 @@ class FormText extends StatelessWidget {
             maxLength: 200,
             minLines: 5,
             maxLines: 5,
+            validator: (valor) {
+              if (valor.isEmpty && valor.length == 0) {
+                return "Campo Obrigatório";
+              }
+            },
             decoration: new InputDecoration(
               hintText: this.titulo,
               labelStyle: TextStyle(color: verde),
@@ -39,9 +44,14 @@ class FormText extends StatelessWidget {
               ),
             ),
           )
-        : TextField(
+        : TextFormField(
             inputFormatters: [MaskTextInputFormatter(mask: "##/##/####")],
             controller: this._controller,
+            validator: (valor) {
+              if (valor.isEmpty && valor.length == 0) {
+                return "Campo Obrigatório";
+              }
+            },
             keyboardType: TextInputType.number,
             decoration: new InputDecoration(
               hintText: this.titulo,

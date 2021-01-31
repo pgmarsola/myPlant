@@ -7,7 +7,6 @@ import 'package:my_plant/screens/products.dart';
 import 'package:my_plant/utils/colors.dart';
 import 'package:my_plant/widgets/application_btn.dart';
 import 'package:my_plant/widgets/bottombar.dart';
-import 'package:my_plant/widgets/topbar.dart';
 
 class ApplicationsScreen extends StatefulWidget {
   final tamanho;
@@ -39,8 +38,7 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
       DatabaseHelper.columnDate: data.date,
       DatabaseHelper.columnAnnotation: data.annotation,
       DatabaseHelper.columnDateApplication: data.dateApplication,
-      DatabaseHelper.columnLongA: data.longA,
-      DatabaseHelper.columnLatA: data.latA,
+      DatabaseHelper.columnPolygons: data.polygons,
       DatabaseHelper.columnLongB: data.longB,
       DatabaseHelper.columnLatB: data.latB,
     };

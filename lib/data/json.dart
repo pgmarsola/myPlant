@@ -10,8 +10,7 @@ class JsonData {
         "date": "10/01/2021",
         "annotation": "",
         "dateApplication": "",
-        "lngA": "",
-        "latA": "",
+        "polygons": "",
         "longB": "",
         "latB": ""
       },
@@ -23,8 +22,7 @@ class JsonData {
         "date": "10/01/2021",
         "annotation": "",
         "dateApplication": "",
-        "lngA": "",
-        "latA": "",
+        "polygons": "",
         "longB": "",
         "latB": ""
       },
@@ -36,8 +34,7 @@ class JsonData {
         "date": "10/01/2021",
         "annotation": "",
         "dateApplication": "",
-        "lngA": "",
-        "latA": "",
+        "polygons": "",
         "longB": "",
         "latB": ""
       },
@@ -49,8 +46,7 @@ class JsonData {
         "date": "10/01/2021",
         "annotation": "",
         "dateApplication": "",
-        "lngA": "",
-        "latA": "",
+        "polygons": "",
         "longB": "",
         "latB": ""
       }
