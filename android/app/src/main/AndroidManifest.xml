@@ -15,7 +15,11 @@
         android:label="my_plant"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
+<<<<<<< HEAD
                android:value="YOUR_API_KEY"/>
+=======
+               android:value="API_KEY"/>
+>>>>>>> fa6a76d932e0ff207d84e3d9cd3d17bcc606c9e6
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
